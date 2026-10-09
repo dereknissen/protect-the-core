@@ -7,7 +7,6 @@ public class EnemyScript : MonoBehaviour
     public GameObject Core;
     public GameObject GameManager;
     public int Speed = 10;
-    private bool chasing = false;
 
     void Start()
     {
