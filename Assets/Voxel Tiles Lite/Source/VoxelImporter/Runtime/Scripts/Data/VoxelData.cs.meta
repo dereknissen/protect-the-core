@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b515adc86b611e443ab8a13351453f2a
+timeCreated: 1464071969
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Data/VoxelData.cs
+  uploadId: 979230

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 99ea1c205b8fb1447887ca146e469cfa
+timeCreated: 1461220885
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/VoxelSkinnedAnimationObjectEditor.cs
+  uploadId: 979230

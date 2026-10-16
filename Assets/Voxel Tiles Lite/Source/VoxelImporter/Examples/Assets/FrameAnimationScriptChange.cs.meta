@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: ff147937a1e8aa6428c266abe37f8abe
+timeCreated: 1533698837
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Assets/FrameAnimationScriptChange.cs
+  uploadId: 979230

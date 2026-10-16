@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6e03aa48a1d6d124b9b07beab31782a4
+timeCreated: 1464071991
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Data/WeightData.cs
+  uploadId: 979230

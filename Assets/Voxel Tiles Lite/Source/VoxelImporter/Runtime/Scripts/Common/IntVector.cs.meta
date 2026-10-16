@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 21d223dddce27a44a91cfe01adc395b9
+timeCreated: 1461229881
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Common/IntVector.cs
+  uploadId: 979230

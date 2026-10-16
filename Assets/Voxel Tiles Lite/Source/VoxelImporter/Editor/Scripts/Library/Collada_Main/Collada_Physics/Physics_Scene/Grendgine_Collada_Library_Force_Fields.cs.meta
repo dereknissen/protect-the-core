@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 686087f62b84bac4da8d53d98318a56e
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Physics/Physics_Scene/Grendgine_Collada_Library_Force_Fields.cs
+  uploadId: 979230

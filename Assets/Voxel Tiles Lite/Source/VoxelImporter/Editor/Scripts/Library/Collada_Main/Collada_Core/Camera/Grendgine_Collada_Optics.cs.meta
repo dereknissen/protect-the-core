@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 2890fa00ee5af9045b4195f766606b4f
+timeCreated: 1487045328
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Core/Camera/Grendgine_Collada_Optics.cs
+  uploadId: 979230

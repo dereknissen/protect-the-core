@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d378980e2cb59074488c3764d20970a7
+timeCreated: 1487045329
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Core/Transform/Grendgine_Collada_Matrix.cs
+  uploadId: 979230

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5f171cd8d980e9d4c8d25d3709bee096
+timeCreated: 1487045328
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Physics/Physics_Model/Grendgine_Collada_Rigid_Body.cs
+  uploadId: 979230

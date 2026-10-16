@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6db79bc6e3f685043bad8ddc0a5c0c43
+timeCreated: 1471077935
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Extra/VoxelChunksObjectExplosion.cs
+  uploadId: 979230

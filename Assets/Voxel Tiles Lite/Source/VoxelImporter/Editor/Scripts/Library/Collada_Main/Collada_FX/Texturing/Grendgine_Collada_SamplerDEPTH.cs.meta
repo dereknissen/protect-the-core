@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b906a7c9e884ac240b3430525cc075a7
+timeCreated: 1487045328
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Texturing/Grendgine_Collada_SamplerDEPTH.cs
+  uploadId: 979230

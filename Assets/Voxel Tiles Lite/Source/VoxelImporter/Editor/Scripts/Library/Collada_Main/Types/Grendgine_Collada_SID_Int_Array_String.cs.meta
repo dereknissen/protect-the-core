@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 55d008f2611554b4b8f7383487fc3cfd
+timeCreated: 1487045329
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Types/Grendgine_Collada_SID_Int_Array_String.cs
+  uploadId: 979230

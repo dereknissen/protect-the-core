@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5b4909ce0a7f49146a4785668c78201a
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/AloneSoft.VoxelImporter.asmdef
+  uploadId: 979230

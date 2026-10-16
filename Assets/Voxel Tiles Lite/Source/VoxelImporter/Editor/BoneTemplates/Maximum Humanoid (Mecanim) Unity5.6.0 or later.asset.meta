@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8c2428dd1977e8b428a537917a9cfa24
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/BoneTemplates/Maximum
+    Humanoid (Mecanim) Unity5.6.0 or later.asset
+  uploadId: 979230

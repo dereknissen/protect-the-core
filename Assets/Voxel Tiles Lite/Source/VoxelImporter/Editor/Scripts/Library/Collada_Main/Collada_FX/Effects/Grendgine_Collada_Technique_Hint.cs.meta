@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 32e4b11a8d79d994793d25c30fee9298
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Effects/Grendgine_Collada_Technique_Hint.cs
+  uploadId: 979230

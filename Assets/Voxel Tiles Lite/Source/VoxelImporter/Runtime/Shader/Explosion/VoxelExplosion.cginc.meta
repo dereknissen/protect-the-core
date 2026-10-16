@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 151d591cca0a45949a836ef46c578d80
+timeCreated: 1470804222
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Shader/Explosion/VoxelExplosion.cginc
+  uploadId: 979230

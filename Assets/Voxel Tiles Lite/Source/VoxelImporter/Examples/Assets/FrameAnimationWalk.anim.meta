@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b5fa741c6ca4e954992ae5bffb7e8dd1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Assets/FrameAnimationWalk.anim
+  uploadId: 979230

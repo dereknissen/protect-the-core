@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a56048902b26def40a7c40ead8e4eeaa
+timeCreated: 1487045328
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Texturing/Grendgine_Collada_Argument_Alpha.cs
+  uploadId: 979230

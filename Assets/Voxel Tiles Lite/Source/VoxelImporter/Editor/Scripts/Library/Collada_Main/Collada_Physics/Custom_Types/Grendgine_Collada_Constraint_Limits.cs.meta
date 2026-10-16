@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 62aca3ec220be0344b37bd71898f54b7
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Physics/Custom_Types/Grendgine_Collada_Constraint_Limits.cs
+  uploadId: 979230

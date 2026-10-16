@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8ff6d4e59dce28447b50037efdfc7684
+timeCreated: 1487045326
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Custom_Types/Grendgine_Collada_Renderable_Share.cs
+  uploadId: 979230

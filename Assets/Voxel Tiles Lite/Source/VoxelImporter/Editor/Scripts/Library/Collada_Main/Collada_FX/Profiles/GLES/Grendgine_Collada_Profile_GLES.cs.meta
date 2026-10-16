@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b93160428da29ca44bc8f596ac0ef54c
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Profiles/GLES/Grendgine_Collada_Profile_GLES.cs
+  uploadId: 979230

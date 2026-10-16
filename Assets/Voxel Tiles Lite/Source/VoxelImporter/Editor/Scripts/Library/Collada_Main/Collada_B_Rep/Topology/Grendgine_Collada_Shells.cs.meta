@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 07f872f84bbf3ae40a32deebb89f94be
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_B_Rep/Topology/Grendgine_Collada_Shells.cs
+  uploadId: 979230

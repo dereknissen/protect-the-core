@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1961e9396e560d344ab0c5f628f844ac
+timeCreated: 1468995451
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/VoxelHumanoidConfigreAvatar.cs
+  uploadId: 979230

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0842a959f9016c04d85a32903bd71237
+timeCreated: 1468207922
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Scripts/RigidbodyEnable.cs
+  uploadId: 979230

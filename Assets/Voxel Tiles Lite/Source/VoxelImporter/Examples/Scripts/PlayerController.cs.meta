@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5b59bfc4c589e8f40b1b75290d64bd46
+timeCreated: 1465633523
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Scripts/PlayerController.cs
+  uploadId: 979230

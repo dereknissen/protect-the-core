@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 02dfaf9ccb464224fa7d1ea5918d8fd4
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Kinematics/Kinematics_Models/Grendgine_Collada_Instance_Kinematics_Model.cs
+  uploadId: 979230

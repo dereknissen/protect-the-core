@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b0787c4b97e2ed64fa2db0626aba9e2d
+timeCreated: 1487045328
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Physics/Technique_Common/Grendgine_Collada_Technique_Common_Rigid_Constraint.cs
+  uploadId: 979230

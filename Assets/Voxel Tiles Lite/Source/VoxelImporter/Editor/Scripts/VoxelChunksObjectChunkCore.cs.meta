@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8afa8b1a7f920c947bc538c158e0c4df
+timeCreated: 1467270035
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/VoxelChunksObjectChunkCore.cs
+  uploadId: 979230

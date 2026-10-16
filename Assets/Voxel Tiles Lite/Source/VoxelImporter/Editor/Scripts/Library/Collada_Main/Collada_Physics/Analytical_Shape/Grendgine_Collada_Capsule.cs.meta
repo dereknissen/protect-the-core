@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 9fd61d5f899f5944a9b7a7c3c6a62369
+timeCreated: 1487045329
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_Physics/Analytical_Shape/Grendgine_Collada_Capsule.cs
+  uploadId: 979230

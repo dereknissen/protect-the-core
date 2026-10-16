@@ -1,0 +1,24 @@
+{
+    "name": "AloneSoft.VoxelImporter.Editor",
+    "rootNamespace": "",
+    "references": [
+        "AloneSoft.VoxelImporter"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.shadergraph",
+            "expression": "12.1.0",
+            "define": "VOXELIMPORTER_SHADERGRAPH"
+        }
+    ],
+    "noEngineReferences": false
+}

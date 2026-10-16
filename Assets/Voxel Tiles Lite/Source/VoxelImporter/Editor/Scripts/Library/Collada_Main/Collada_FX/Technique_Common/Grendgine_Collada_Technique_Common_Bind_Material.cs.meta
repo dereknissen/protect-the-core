@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5d95f1d95961a644d9bb2aa45b2c3dcf
+timeCreated: 1487045327
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Technique_Common/Grendgine_Collada_Technique_Common_Bind_Material.cs
+  uploadId: 979230

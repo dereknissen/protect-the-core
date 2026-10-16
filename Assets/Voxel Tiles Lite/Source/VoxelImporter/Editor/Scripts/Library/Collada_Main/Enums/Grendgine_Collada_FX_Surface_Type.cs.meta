@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 34a892297c231824c94fe1744b64a2a8
+timeCreated: 1487230804
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Enums/Grendgine_Collada_FX_Surface_Type.cs
+  uploadId: 979230

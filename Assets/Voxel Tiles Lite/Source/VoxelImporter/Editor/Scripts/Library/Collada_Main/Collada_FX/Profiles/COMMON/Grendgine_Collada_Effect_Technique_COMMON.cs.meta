@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8690e7f44a7e8c944a59b52fffe8db3d
+timeCreated: 1487045326
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Profiles/COMMON/Grendgine_Collada_Effect_Technique_COMMON.cs
+  uploadId: 979230

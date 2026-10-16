@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f5ef1a05669f1934ba3d0b465f1f24f0
+timeCreated: 1487045326
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/Library/Collada_Main/Collada_FX/Parameters/Grendgine_Collada_Semantic.cs
+  uploadId: 979230

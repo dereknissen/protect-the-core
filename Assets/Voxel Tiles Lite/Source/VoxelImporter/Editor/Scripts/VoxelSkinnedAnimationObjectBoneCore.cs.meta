@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8616b2a3b4cb27b44a9c37acc7f4101c
+timeCreated: 1465969519
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Editor/Scripts/VoxelSkinnedAnimationObjectBoneCore.cs
+  uploadId: 979230

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c764f1c6aadd2c3499a0a2c1de723293
+timeCreated: 1471099292
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Extra/VoxelSkinnedAnimationObjectExplosion.cs
+  uploadId: 979230

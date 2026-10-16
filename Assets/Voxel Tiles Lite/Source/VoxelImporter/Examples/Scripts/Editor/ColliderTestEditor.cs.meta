@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c6ef8da569ed7b34691ca6bd6d24a51f
+timeCreated: 1463385344
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Scripts/Editor/ColliderTestEditor.cs
+  uploadId: 979230

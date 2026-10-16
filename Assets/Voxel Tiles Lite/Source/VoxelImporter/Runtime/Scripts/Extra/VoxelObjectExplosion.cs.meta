@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1503f86d714e89f408832a3ee522cfc5
+timeCreated: 1470716787
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/Extra/VoxelObjectExplosion.cs
+  uploadId: 979230

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: c526bd8a204f2f448acb953c8e7fb845
+timeCreated: 1516944101
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Runtime/Scripts/ScriptableObject/VoxelStructure.cs
+  uploadId: 979230

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 0fe7a70b622d8274fac8f420a920e5db
+timeCreated: 1463383966
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 398560
+  packageName: Voxel Tile Asset Pack - Lite
+  packageVersion: 1.0
+  assetPath: Assets/Voxel Tiles Lite/Source/VoxelImporter/Examples/Scripts/EditMesh.cs
+  uploadId: 979230
