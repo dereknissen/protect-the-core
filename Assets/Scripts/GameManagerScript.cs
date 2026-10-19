@@ -1,74 +1,168 @@
-using System;
-using Unity.VectorGraphics;
+
+using System.Collections;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-    // Game settings
-    public int maxLives;
-    public int enemiesToStop;
+    [Header("Game Settings")]
+    public int maxLives = 3;
+    public int enemiesToStop = 10;
 
-    // Initialize vars
+    [Header("Game State")]
     public bool isPlaying;
     public int enemiesStopped;
     public int health;
-    public Transform enemiesWrapper;
 
-    // This runs when the sccene is started
+    [Header("Enemy Spawning")]
+    public Transform enemiesWrapper;
+    public Transform enemySpawnPoints;
+    public GameObject enemyPrefab;
+    public float spawnDelay = 2f;
+
+    private bool isSpawning = false;
+
     void Start()
     {
-        startGame(); // automatically start the game for the player
+        startGame();
     }
 
-    // Update is called once per frame
     void Update()
     {
-       // check for losing condition
-       if (health <= 0)
+        if (!isPlaying)
+            return;
+
+        // Check losing condition
+        if (health <= 0)
         {
-            isPlaying = false; // stop the game
-            playerLost(); // start the lose sequence
+            isPlaying = false;
+            playerLost();
+            return;
         }
 
-       // check for winning condition
-       if (enemiesStopped >= enemiesToStop)
+        // Check winning condition
+        if (enemiesStopped >= enemiesToStop)
         {
-            isPlaying = false; // stop the game
-            playerWon(); // start the win sequence
+            isPlaying = false;
+            playerWon();
+            return;
+        }
+
+        // Check number of living enemies
+        int liveEnemies = enemiesWrapper.childCount;
+
+        // Start spawning if there are no enemies
+        if (liveEnemies <= 0 && !isSpawning)
+        {
+            StartCoroutine(spawnEnemyWithDelay());
         }
     }
 
-    public void startGame()
+    void startGame()
     {
+        StopAllCoroutines();
+        isSpawning = false;
+
         clearUIs();
         clearEnemies();
-        isPlaying = true;
+
         enemiesStopped = 0;
-        health = maxLives; // 3 lives (player loses when 3 enemies reach the columns)
+        health = maxLives;
+        isPlaying = true;
     }
 
-    private void playerWon()
+    IEnumerator spawnEnemyWithDelay()
     {
-        Console.WriteLine("Player won the game!");
-        // display the win UI
+        isSpawning = true;
+
+        // Wait before spawning next enemy
+        yield return new WaitForSeconds(spawnDelay);
+
+        // Make sure game is still running
+        if (isPlaying && enemiesWrapper.childCount == 0)
+        {
+            spawnEnemy();
+        }
+
+        isSpawning = false;
     }
 
-    private void playerLost()
+
+    void spawnEnemy()
     {
-        Console.WriteLine("Player lost the game!");
-        // display the lost UI
+        // Make sure spawn points exist
+        if (enemySpawnPoints == null || enemySpawnPoints.childCount == 0)
+        {
+            Debug.LogError("No enemy spawn points assigned!");
+            return;
+        }
+
+        // Make sure enemy prefab exists
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("No enemy prefab assigned!");
+            return;
+        }
+
+        // Select random spawn point
+        int randomIndex = Random.Range(0, enemySpawnPoints.childCount);
+        Transform spawnPoint = enemySpawnPoints.GetChild(randomIndex);
+
+        // Spawn enemy
+        GameObject newEnemy = Instantiate(
+            enemyPrefab,
+            spawnPoint.position,
+            spawnPoint.rotation,
+            enemiesWrapper
+        );
+
+        // Assign GameManager to the enemy's follow script
+        EnemyFollowCore enemyFollow = newEnemy.GetComponent<EnemyFollowCore>();
+
+        if (enemyFollow != null)
+        {
+            enemyFollow.gameManagerScript = this;
+        }
+
+        // Initialize enemy health using EnemyDeath
+        EnemyDeath enemyDeath = newEnemy.GetComponent<EnemyDeath>();
+
+        if (enemyDeath != null)
+        {
+            enemyDeath.health = 1;
+        }
+        else
+        {
+            Debug.LogWarning("Spawned enemy is missing EnemyDeath!");
+        }
     }
 
-    private void clearEnemies()
+
+    void playerWon()
+    {
+        Debug.Log("Player won the game!");
+
+        // Display win UI here
+    }
+
+    void playerLost()
+    {
+        Debug.Log("Player lost the game!");
+
+        // Display lose UI here
+    }
+
+    void clearEnemies()
     {
         foreach (Transform enemy in enemiesWrapper)
         {
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
     }
-    // This method is supposed to destroy all of the UIs like "You won the game" or "You lost the game" when the game is restarted
-    private void clearUIs()
+
+    void clearUIs()
     {
-        Console.WriteLine("Clearing UIs");
+        Debug.Log("Clearing UIs");
+
+        // Hide win and lose screens here
     }
 }

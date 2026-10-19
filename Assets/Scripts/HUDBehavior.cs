@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class HUDBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        livesLeftText.text = "Lives: " + gameManager.GetComponent<GameManagerScript>().health;
+        pointsText.text = "Points: " + gameManager.GetComponent<GameManagerScript>().enemiesStopped + " / 10";
     }
 }

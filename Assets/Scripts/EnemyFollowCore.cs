@@ -13,6 +13,8 @@ public class EnemyFollowCore : MonoBehaviour
     [Header("Rotation")]
     public bool faceCore = true;
 
+    public GameManagerScript gameManagerScript;
+
     void Update()
     {
         // Find the Core automatically if one isn't assigned
@@ -32,7 +34,10 @@ public class EnemyFollowCore : MonoBehaviour
 
         // Stop when close enough
         if (direction.magnitude <= stoppingDistance)
-            return;
+        {
+            gameManagerScript.GetComponent<GameManagerScript>().health -= 1;
+            Destroy(gameObject);
+        }
 
         // Move toward the Core
         transform.position +=

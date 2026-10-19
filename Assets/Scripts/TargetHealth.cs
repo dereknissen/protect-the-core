@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TargetHealth : MonoBehaviour
 {
-    public float health = 100f;
+    public float health = 1f;
 
     private bool isDead = false;
 
