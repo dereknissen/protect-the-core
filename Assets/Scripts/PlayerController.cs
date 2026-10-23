@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +18,9 @@ public class PlayerController : MonoBehaviour
     public float maxPitch = 60f;
     public float cameraSmoothness = 10f;
 
+    [Header("Game Manager")]
+    public GameManagerScript gameManagerScript;
+
     private Rigidbody rb;
     private Vector2 moveInput;
     private float cameraYaw;
@@ -30,7 +32,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        // Keep the player upright
         rb.constraints |= RigidbodyConstraints.FreezeRotationX
                         | RigidbodyConstraints.FreezeRotationZ;
 
@@ -40,12 +41,24 @@ public class PlayerController : MonoBehaviour
         if (cameraTransform != null)
             cameraYaw = cameraTransform.eulerAngles.y;
 
+        // Automatically find GameManager if not assigned
+        if (gameManagerScript == null)
+            gameManagerScript = FindFirstObjectByType<GameManagerScript>();
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
+        // Disable player input when game is over
+        if (gameManagerScript != null && !gameManagerScript.isPlaying)
+        {
+            moveInput = Vector2.zero;
+            jumpRequested = false;
+            return;
+        }
+
         if (Keyboard.current == null)
             return;
 
@@ -64,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
             jumpRequested = true;
 
-        // Release and recapture mouse
+        // Release mouse with Escape
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -73,7 +86,9 @@ public class PlayerController : MonoBehaviour
 
         if (Mouse.current != null)
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            // Only lock mouse if game is running
+            if (Mouse.current.leftButton.wasPressedThisFrame &&
+                Cursor.lockState != CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -88,34 +103,47 @@ public class PlayerController : MonoBehaviour
                 cameraPitch -= mouseDelta.y * mouseSensitivity;
 
                 cameraPitch = Mathf.Clamp(
-                    cameraPitch, minPitch, maxPitch);
+                    cameraPitch, minPitch, maxPitch
+                );
             }
         }
     }
 
     void FixedUpdate()
     {
-        // Move relative to camera direction
-        Vector3 forward = Quaternion.Euler(0f, cameraYaw, 0f)
-                          * Vector3.forward;
+        // Stop horizontal movement when game is over
+        if (gameManagerScript != null && !gameManagerScript.isPlaying)
+        {
+            Vector3 velocity = rb.linearVelocity;
 
-        Vector3 right = Quaternion.Euler(0f, cameraYaw, 0f)
-                        * Vector3.right;
+            rb.linearVelocity = new Vector3(
+                0f,
+                velocity.y,
+                0f
+            );
+
+            jumpRequested = false;
+            return;
+        }
+
+        Vector3 forward =
+            Quaternion.Euler(0f, cameraYaw, 0f) * Vector3.forward;
+
+        Vector3 right =
+            Quaternion.Euler(0f, cameraYaw, 0f) * Vector3.right;
 
         Vector3 movement =
             (forward * moveInput.y + right * moveInput.x).normalized;
 
-        Vector3 velocity = rb.linearVelocity;
+        Vector3 velocityCurrent = rb.linearVelocity;
 
         rb.linearVelocity = new Vector3(
             movement.x * moveSpeed,
-            velocity.y,
+            velocityCurrent.y,
             movement.z * moveSpeed
         );
 
-        // Rotate player toward movement direction
-
-        // Face the direction the camera is aiming
+        // Rotate player toward camera direction
         if (cameraTransform != null)
         {
             Vector3 aimDirection = cameraTransform.forward;
@@ -134,11 +162,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         // Jump only when grounded
         if (jumpRequested && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(
+                Vector3.up * jumpForce,
+                ForceMode.Impulse
+            );
+
             isGrounded = false;
         }
 
@@ -150,7 +181,10 @@ public class PlayerController : MonoBehaviour
         if (cameraTransform == null)
             return;
 
-        // Camera follows behind and above the player
+        // Freeze camera movement when game is over
+        if (gameManagerScript != null && !gameManagerScript.isPlaying)
+            return;
+
         Quaternion cameraRotation =
             Quaternion.Euler(cameraPitch, cameraYaw, 0f);
 

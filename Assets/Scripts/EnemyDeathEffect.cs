@@ -15,7 +15,7 @@ public class EnemyDeathEffect : MonoBehaviour
     private Color[] originalColors;
     private MaterialPropertyBlock propertyBlock;
 
-    public GameObject gameManagerScript;
+    public GameManagerScript gameManagerScript;
 
     void Awake()
     {
@@ -49,7 +49,7 @@ public class EnemyDeathEffect : MonoBehaviour
 
         isDying = true;
 
-        gameManagerScript.GetComponent<GameManagerScript>().enemiesStopped += 1;
+        gameManagerScript.enemiesStopped++;
 
         // Stop enemy movement scripts during the effect.
         MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
