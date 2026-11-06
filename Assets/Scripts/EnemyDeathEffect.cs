@@ -35,9 +35,11 @@ public class EnemyDeathEffect : MonoBehaviour
             if (materials.Length > 0 && materials[0] != null)
             {
                 if (materials[0].HasProperty("_BaseColor"))
-                    originalColors[i] = materials[0].GetColor("_BaseColor");
+                    originalColors[i] =
+                        materials[0].GetColor("_BaseColor");
                 else if (materials[0].HasProperty("_Color"))
-                    originalColors[i] = materials[0].GetColor("_Color");
+                    originalColors[i] =
+                        materials[0].GetColor("_Color");
             }
         }
     }
@@ -49,9 +51,19 @@ public class EnemyDeathEffect : MonoBehaviour
 
         isDying = true;
 
-        gameManagerScript.enemiesStopped++;
+        // Notify GameManager of enemy defeat
+        if (gameManagerScript != null)
+        {
+            gameManagerScript.enemyDefeated();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "EnemyDeathEffect: GameManager not assigned!"
+            );
+        }
 
-        // Stop enemy movement scripts during the effect.
+        // Stop enemy movement scripts during the effect
         MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
 
         foreach (MonoBehaviour script in scripts)
@@ -60,7 +72,7 @@ public class EnemyDeathEffect : MonoBehaviour
                 script.enabled = false;
         }
 
-        // Stop physics movement if the enemy has a Rigidbody.
+        // Stop physics movement if enemy has a Rigidbody
         Rigidbody rb = GetComponent<Rigidbody>();
 
         if (rb != null)
@@ -81,14 +93,14 @@ public class EnemyDeathEffect : MonoBehaviour
         {
             float progress = elapsed / effectDuration;
 
-            // Grow larger over time.
+            // Grow larger over time
             transform.localScale = Vector3.Lerp(
                 originalScale,
                 originalScale * growMultiplier,
                 progress
             );
 
-            // Flash brightly, then fade back toward the original color.
+            // Flash brightly, then fade back
             Color currentColor = Color.Lerp(
                 flashColor,
                 Color.white,

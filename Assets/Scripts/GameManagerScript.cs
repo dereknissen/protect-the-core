@@ -1,16 +1,25 @@
+
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
     [Header("Game Settings")]
     public int maxLives = 3;
-    public int enemiesToStop = 10;
+    public int enemiesToStop = 3;
+    public int totalWaves = 3;
 
     [Header("Game State")]
     public bool isPlaying;
     public int enemiesStopped;
     public int health;
+    public int currentWave = 1;
+
+    [Header("Wave Settings")]
+    public float startingEnemySpeed = 0.5f;
+    public float speedIncreasePerWave = 0.25f;
+    public float wavePauseDuration = 3f;
 
     [Header("Enemy Spawning")]
     public Transform enemiesWrapper;
@@ -23,7 +32,13 @@ public class GameManagerScript : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+    [Header("Wave UI References")]
+    public Text winText;
+    public GameObject replayButton;
+
     private bool isSpawning = false;
+    private bool isTransitioningWave = false;
+    private int enemiesStoppedThisWave = 0;
 
     void Start()
     {
@@ -35,7 +50,7 @@ public class GameManagerScript : MonoBehaviour
         if (!isPlaying)
             return;
 
-        // Check losing condition
+        // Check losing condition first
         if (health <= 0)
         {
             isPlaying = false;
@@ -43,11 +58,11 @@ public class GameManagerScript : MonoBehaviour
             return;
         }
 
-        // Check winning condition
-        if (enemiesStopped >= enemiesToStop)
+        // Check wave completion
+        if (enemiesStoppedThisWave >= enemiesToStop &&
+            !isTransitioningWave)
         {
-            isPlaying = false;
-            playerWon();
+            StartCoroutine(completeWave());
             return;
         }
 
@@ -57,7 +72,7 @@ public class GameManagerScript : MonoBehaviour
 
         int liveEnemies = enemiesWrapper.childCount;
 
-        // Start spawning if there are no enemies
+        // Spawn another enemy when none remain
         if (liveEnemies <= 0 && !isSpawning)
         {
             StartCoroutine(spawnEnemyWithDelay());
@@ -68,23 +83,32 @@ public class GameManagerScript : MonoBehaviour
     public void startGame()
     {
         Debug.Log("Starting game");
-        StopAllCoroutines();
-        isSpawning = false;
 
-        // Reset game state before clearing enemies
+        StopAllCoroutines();
+
+        // Restore time scale in case previous wave paused
+        Time.timeScale = 1f;
+
+        isSpawning = false;
+        isTransitioningWave = false;
         isPlaying = false;
 
         clearUIs();
         clearEnemies();
 
+        // Reset game state
         enemiesStopped = 0;
+        enemiesStoppedThisWave = 0;
         health = maxLives;
+        currentWave = 1;
 
         // Lock cursor for gameplay
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         isPlaying = true;
+
+        Debug.Log("Wave 1 started!");
     }
 
     IEnumerator spawnEnemyWithDelay()
@@ -94,8 +118,9 @@ public class GameManagerScript : MonoBehaviour
         // Wait before spawning the next enemy
         yield return new WaitForSeconds(spawnDelay);
 
-        // Make sure the game is still running
+        // Make sure game is still running
         if (isPlaying &&
+            !isTransitioningWave &&
             enemiesWrapper != null &&
             enemiesWrapper.childCount == 0)
         {
@@ -105,15 +130,8 @@ public class GameManagerScript : MonoBehaviour
         isSpawning = false;
     }
 
-    public void replayButtonClicked()
-    {
-        Debug.Log("Debug button clicked!");
-        startGame();
-    }
-
     void spawnEnemy()
     {
-        // Make sure spawn points exist
         if (enemySpawnPoints == null ||
             enemySpawnPoints.childCount == 0)
         {
@@ -121,7 +139,6 @@ public class GameManagerScript : MonoBehaviour
             return;
         }
 
-        // Make sure enemy prefab exists
         if (enemyPrefab == null)
         {
             Debug.LogError("No enemy prefab assigned!");
@@ -151,16 +168,28 @@ public class GameManagerScript : MonoBehaviour
             enemiesWrapper
         );
 
-        // Assign GameManager to enemy follow script
+        // Calculate movement speed based on current wave
+        float currentSpeed =
+            startingEnemySpeed +
+            ((currentWave - 1) * speedIncreasePerWave);
+
+        // Assign GameManager and movement speed
         EnemyFollowCore enemyFollow =
             newEnemy.GetComponent<EnemyFollowCore>();
 
         if (enemyFollow != null)
         {
             enemyFollow.gameManagerScript = this;
+            enemyFollow.moveSpeed = currentSpeed;
+        }
+        else
+        {
+            Debug.LogWarning(
+                "Spawned enemy is missing EnemyFollowCore!"
+            );
         }
 
-        // Assign GameManager to enemy death effect script
+        // Assign GameManager to enemy death effect
         EnemyDeathEffect enemyDeath =
             newEnemy.GetComponent<EnemyDeathEffect>();
 
@@ -174,49 +203,168 @@ public class GameManagerScript : MonoBehaviour
                 "Spawned enemy is missing EnemyDeathEffect!"
             );
         }
+
+        Debug.Log(
+            $"Spawned enemy for Wave {currentWave} " +
+            $"with movement speed {currentSpeed}"
+        );
+    }
+
+    // Called whenever an enemy is successfully defeated
+    public void enemyDefeated()
+    {
+        if (!isPlaying || isTransitioningWave)
+            return;
+
+        enemiesStopped++;
+        enemiesStoppedThisWave++;
+
+        Debug.Log(
+            $"Wave {currentWave}: " +
+            $"{enemiesStoppedThisWave}/{enemiesToStop} defeated"
+        );
+    }
+
+    IEnumerator completeWave()
+    {
+        isTransitioningWave = true;
+        isPlaying = false;
+
+        // Pending spawn coroutines check isPlaying
+        // before creating another enemy.
+        isSpawning = false;
+
+        Debug.Log($"Wave {currentWave} completed!");
+
+        // Final wave completed
+        if (currentWave >= totalWaves)
+        {
+            playerWon();
+            yield break;
+        }
+
+        // Display wave completion message
+        if (winText != null)
+        {
+            winText.text =
+                $"WAVE {currentWave} COMPLETE!";
+        }
+
+        if (hud != null)
+            hud.SetActive(false);
+
+        if (winScreen != null)
+            winScreen.SetActive(true);
+
+        if (loseScreen != null)
+            loseScreen.SetActive(false);
+
+        // Hide Replay button between waves
+        if (replayButton != null)
+            replayButton.SetActive(false);
+
+        // Unlock cursor during transition
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Pause gameplay
+        Time.timeScale = 0f;
+
+        // Wait in real time while game is paused
+        yield return new WaitForSecondsRealtime(
+            wavePauseDuration
+        );
+
+        // Resume gameplay
+        Time.timeScale = 1f;
+
+        // Remove leftover enemies before next wave
+        clearEnemies();
+
+        // Advance to next wave
+        currentWave++;
+        enemiesStoppedThisWave = 0;
+
+        // Hide Win UI and show HUD
+        if (winScreen != null)
+            winScreen.SetActive(false);
+
+        if (hud != null)
+            hud.SetActive(true);
+
+        // Lock cursor again
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        isTransitioningWave = false;
+        isPlaying = true;
+
+        Debug.Log($"Wave {currentWave} started!");
+    }
+
+    public void replayButtonClicked()
+    {
+        Debug.Log("Replay button clicked!");
+        startGame();
     }
 
     void playerWon()
     {
         Debug.Log("Player won the game!");
 
-        // Stop enemy spawning
+        isPlaying = false;
+
         StopAllCoroutines();
         isSpawning = false;
 
-        // Hide HUD
+        Time.timeScale = 1f;
+
+        if (winText != null)
+        {
+            winText.text = "YOU WIN!";
+        }
+
         if (hud != null)
             hud.SetActive(false);
 
-        // Show win screen
         if (winScreen != null)
             winScreen.SetActive(true);
 
-        // Hide lose screen
         if (loseScreen != null)
             loseScreen.SetActive(false);
 
-        // Unlock cursor for UI interaction
+        // Show Replay button for final victory
+        if (replayButton != null)
+            replayButton.SetActive(true);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-   void playerLost()
-{
-    Debug.Log("Player lost the game!");
+    void playerLost()
+    {
+        Debug.Log("Player lost the game!");
 
-    if (hud != null)
-        hud.SetActive(false);
+        isPlaying = false;
 
-    if (winScreen != null)
-        winScreen.SetActive(false);
+        StopAllCoroutines();
+        isSpawning = false;
 
-    if (loseScreen != null)
-        loseScreen.SetActive(true);
+        Time.timeScale = 1f;
 
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
-    Debug.Log("GameManager unlocked cursor");
+        if (hud != null)
+            hud.SetActive(false);
+
+        if (winScreen != null)
+            winScreen.SetActive(false);
+
+        if (loseScreen != null)
+            loseScreen.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Debug.Log("GameManager unlocked cursor");
     }
 
     void clearEnemies()
@@ -224,10 +372,12 @@ public class GameManagerScript : MonoBehaviour
         if (enemiesWrapper == null)
             return;
 
-        foreach (Transform enemy in enemiesWrapper)
+        // Iterate backwards to safely detach children
+        for (int i = enemiesWrapper.childCount - 1;
+             i >= 0; i--)
         {
-            // Detach immediately so childCount is accurate
-            // when the next spawning coroutine runs.
+            Transform enemy = enemiesWrapper.GetChild(i);
+
             enemy.SetParent(null);
             Destroy(enemy.gameObject);
         }
@@ -237,16 +387,19 @@ public class GameManagerScript : MonoBehaviour
     {
         Debug.Log("Clearing UIs");
 
-        // Show gameplay HUD
         if (hud != null)
             hud.SetActive(true);
 
-        // Hide win screen
         if (winScreen != null)
             winScreen.SetActive(false);
 
-        // Hide lose screen
         if (loseScreen != null)
             loseScreen.SetActive(false);
+
+        if (replayButton != null)
+            replayButton.SetActive(true);
+
+        if (winText != null)
+            winText.text = "YOU WIN!";
     }
 }

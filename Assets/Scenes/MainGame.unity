@@ -2878,10 +2878,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerScript
   maxLives: 3
-  enemiesToStop: 10
+  enemiesToStop: 3
+  totalWaves: 3
   isPlaying: 0
   enemiesStopped: 0
   health: 3
+  currentWave: 0
+  startingEnemySpeed: 0.5
+  speedIncreasePerWave: 0.25
+  wavePauseDuration: 3
   enemiesWrapper: {fileID: 1387794366}
   enemySpawnPoints: {fileID: 494981478}
   enemyPrefab: {fileID: 7562301882765937422, guid: 5a959f69e58c0c6488e7b927e5a4b2e0, type: 3}
@@ -2889,6 +2894,8 @@ MonoBehaviour:
   hud: {fileID: 239579447}
   winScreen: {fileID: 2115549741}
   loseScreen: {fileID: 1485418937}
+  winText: {fileID: 1745414097}
+  replayButton: {fileID: 1264978109}
 --- !u!4 &1231948087
 Transform:
   m_ObjectHideFlags: 0
