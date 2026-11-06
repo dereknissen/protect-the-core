@@ -1,5 +1,8 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using System.Collections;
 
 public class GunController : MonoBehaviour
 {
@@ -9,32 +12,102 @@ public class GunController : MonoBehaviour
     public float fireRate = 0.2f;
     public float bulletSpeed = 40f;
 
+    [Header("Ammo Settings")]
+    public int maxAmmo = 10;
+    public int currentAmmo = 10;
+    public float reloadTime = 2f;
+
     [Header("References")]
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public Transform firePoint;
     public GameObject bulletPrefab;
+    public TMP_Text ammoText;
 
     private float nextFireTime;
+    private bool isReloading = false;
 
     void Start()
     {
         if (playerCamera == null)
             playerCamera = Camera.main;
+
+        currentAmmo = maxAmmo;
+        UpdateAmmoUI();
     }
 
     void Update()
     {
+        if (Keyboard.current != null &&
+            Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            StartReload();
+        }
+
         if (Mouse.current == null)
+            return;
+
+        if (isReloading)
             return;
 
         if (Mouse.current.leftButton.wasPressedThisFrame &&
             Cursor.lockState == CursorLockMode.Locked &&
             Time.time >= nextFireTime)
         {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
+            if (currentAmmo > 0)
+            {
+                Shoot();
+
+                currentAmmo--;
+
+                UpdateAmmoUI();
+
+                nextFireTime = Time.time + fireRate;
+            }
+            else
+            {
+                Debug.Log("Out of energy! Press R to reload.");
+            }
         }
+    }
+
+    void StartReload()
+    {
+        if (isReloading || currentAmmo == maxAmmo)
+            return;
+
+        StartCoroutine(Reload());
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        if (ammoText != null)
+        {
+            ammoText.text = "RELOADING...";
+            ammoText.color = new Color(1f, 0.75f, 0.1f);
+        }
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+
+        UpdateAmmoUI();
+    }
+
+    void UpdateAmmoUI()
+    {
+        if (ammoText == null)
+            return;
+
+        ammoText.text = currentAmmo + " / " + maxAmmo;
+
+        if (currentAmmo <= 3)
+            ammoText.color = Color.red;
+        else
+            ammoText.color = new Color(0.2f, 0.85f, 1f);
     }
 
     void Shoot()
@@ -49,7 +122,6 @@ public class GunController : MonoBehaviour
         if (muzzleFlash != null)
             muzzleFlash.Play();
 
-        // Aim toward the center of the crosshair
         Ray ray = playerCamera.ViewportPointToRay(
             new Vector3(0.5f, 0.5f, 0f));
 
@@ -61,7 +133,6 @@ public class GunController : MonoBehaviour
                 targetPoint = hit.point;
         }
 
-        // Spawn the bullet at the gun barrel
         Vector3 spawnPosition = firePoint != null
             ? firePoint.position
             : transform.position;
@@ -74,7 +145,6 @@ public class GunController : MonoBehaviour
             spawnPosition,
             Quaternion.LookRotation(direction));
 
-        // Prevent the bullet from hitting the player
         Collider bulletCollider = bullet.GetComponent<Collider>();
 
         Collider[] playerColliders =
@@ -89,7 +159,6 @@ public class GunController : MonoBehaviour
             }
         }
 
-        // Launch the projectile
         BulletProjectile projectile =
             bullet.GetComponent<BulletProjectile>();
 
