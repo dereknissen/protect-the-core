@@ -1,7 +1,6 @@
-
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -33,7 +32,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject loseScreen;
 
     [Header("Wave UI References")]
-    public Text winText;
+    public TMP_Text winText;
+    public TMP_Text loseText;
     public GameObject replayButton;
 
     [Header("Med Pack Spawning")]
@@ -43,6 +43,10 @@ public class GameManagerScript : MonoBehaviour
     public float maxMedPackSpawnTime = 40f;
 
     private GameObject currentMedPack;
+
+    [Header("HUD Wave Counter")]
+    public TMP_Text currentWaveText;
+    public TMP_Text enemiesRemainingText;
 
     private bool isSpawning = false;
     private bool isTransitioningWave = false;
@@ -93,6 +97,7 @@ public class GameManagerScript : MonoBehaviour
 
         StopAllCoroutines();
 
+        // Restore time scale
         Time.timeScale = 1f;
 
         isSpawning = false;
@@ -115,6 +120,10 @@ public class GameManagerScript : MonoBehaviour
         health = maxLives;
         currentWave = 1;
 
+        // Update HUD counters
+        updateWaveUI();
+
+        // Lock cursor for gameplay
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -321,7 +330,7 @@ public class GameManagerScript : MonoBehaviour
         );
     }
 
-    // Called when an enemy is defeated
+    // Called whenever an enemy is defeated
     public void enemyDefeated()
     {
         if (!isPlaying || isTransitioningWave)
@@ -330,13 +339,36 @@ public class GameManagerScript : MonoBehaviour
         enemiesStopped++;
         enemiesStoppedThisWave++;
 
+        // Immediately update HUD
+        updateWaveUI();
+
         Debug.Log(
             $"Wave {currentWave}: " +
             $"{enemiesStoppedThisWave}/{enemiesToStop} defeated"
         );
     }
 
-    // Complete a wave
+    // Updates the wave and enemy counter on HUD
+    void updateWaveUI()
+    {
+        int enemiesRemaining = Mathf.Max(
+            0,
+            enemiesToStop - enemiesStoppedThisWave
+        );
+
+        if (currentWaveText != null)
+        {
+            currentWaveText.text =
+                $"WAVE {currentWave}/{totalWaves}";
+        }
+
+        if (enemiesRemainingText != null)
+        {
+            enemiesRemainingText.text =
+                $"{enemiesRemaining} {(enemiesRemaining == 1 ? "Enemy" : "Enemies")} Remaining";
+        }
+    }
+
     IEnumerator completeWave()
     {
         isTransitioningWave = true;
@@ -385,12 +417,17 @@ public class GameManagerScript : MonoBehaviour
         // Resume gameplay
         Time.timeScale = 1f;
 
+        // Remove leftover enemies
         clearEnemies();
 
         // Advance to next wave
         currentWave++;
         enemiesStoppedThisWave = 0;
 
+        // Update HUD for next wave
+        updateWaveUI();
+
+        // Hide Win UI and show HUD
         if (winScreen != null)
             winScreen.SetActive(false);
 
@@ -467,6 +504,9 @@ public class GameManagerScript : MonoBehaviour
         if (loseScreen != null)
             loseScreen.SetActive(true);
 
+        if (loseText != null)
+            loseText.text = "YOU LOST!";
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -482,7 +522,8 @@ public class GameManagerScript : MonoBehaviour
         for (int i = enemiesWrapper.childCount - 1;
              i >= 0; i--)
         {
-            Transform enemy = enemiesWrapper.GetChild(i);
+            Transform enemy =
+                enemiesWrapper.GetChild(i);
 
             enemy.SetParent(null);
             Destroy(enemy.gameObject);
@@ -508,5 +549,8 @@ public class GameManagerScript : MonoBehaviour
 
         if (winText != null)
             winText.text = "YOU WIN!";
+
+        if (loseText != null)
+            loseText.text = "YOU LOST!";
     }
 }
