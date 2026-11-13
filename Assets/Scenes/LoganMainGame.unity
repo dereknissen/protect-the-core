@@ -566,6 +566,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1fe23f98be07ff4abe940114e0f444f, type: 3}
+--- !u!1 &93852414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93852415}
+  m_Layer: 0
+  m_Name: MedPack3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &93852415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93852414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.64, y: 0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1645410611}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &152155901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -743,6 +774,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8825401522807394143, guid: 9ebe52e144728574da036f2e98548961, type: 3}
   m_PrefabInstance: {fileID: 152155901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &193461070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193461071}
+  m_Layer: 0
+  m_Name: MedPack1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193461071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193461070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.57, y: 0.18, z: -2.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1645410611}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &240209285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1196775490118650620, guid: 6cc057f0d611a36409b71b49165a58d3, type: 3}
@@ -1996,7 +2058,7 @@ GameObject:
   - component: {fileID: 919715123}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2184,6 +2246,10 @@ PrefabInstance:
     - target: {fileID: 7190392360658972332, guid: 8fba94173e2a97041a18861de4fdcc9c, type: 3}
       propertyPath: m_Name
       value: Free Pack - Stick Man
+      objectReference: {fileID: 0}
+    - target: {fileID: 7190392360658972332, guid: 8fba94173e2a97041a18861de4fdcc9c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2752,6 +2818,10 @@ MonoBehaviour:
   hud: {fileID: 64650737}
   winScreen: {fileID: 2115549741}
   loseScreen: {fileID: 1485418937}
+  medPackPrefab: {fileID: 1599109315188537176, guid: 8b2b43ca743026342992f7882931ff16, type: 3}
+  medPackSpawnPoints: {fileID: 1645410611}
+  minMedPackSpawnTime: 15
+  maxMedPackSpawnTime: 40
 --- !u!4 &1231948087
 Transform:
   m_ObjectHideFlags: 0
@@ -3038,6 +3108,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 854b6c2bf1dc8bb4f81f0a8ab236ac33, type: 3}
+--- !u!1 &1309364858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1309364859}
+  m_Layer: 0
+  m_Name: MedPack2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1309364859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309364858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.225, y: 0.18, z: 2.249}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1645410611}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1314419469
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,6 +3539,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3922164059779041309, guid: 9ebe52e144728574da036f2e98548961, type: 3}
   m_PrefabInstance: {fileID: 152155901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1645410610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1645410611}
+  m_Layer: 0
+  m_Name: MedPackSpawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1645410611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645410610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.35634, y: 0, z: 4.02713}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 193461071}
+  - {fileID: 1309364859}
+  - {fileID: 93852415}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1653456285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2222615538149900119, guid: 8fba94173e2a97041a18861de4fdcc9c, type: 3}
@@ -4317,6 +4452,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3016590288651650133, guid: b532536456573d040bff577473ac04d4, type: 3}
   m_PrefabInstance: {fileID: 1186325235}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1984165859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984165861}
+  - component: {fileID: 1984165860}
+  m_Layer: 0
+  m_Name: MedPackSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1984165860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984165859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4903ef0572876f34ea2ead255fd255e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MedPackSpawner
+  medPackPrefab: {fileID: 1599109315188537176, guid: 8b2b43ca743026342992f7882931ff16, type: 3}
+  spawnPoints: {fileID: 1645410611}
+  minimumSpawnTime: 15
+  maximumSpawnTime: 35
+--- !u!4 &1984165861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984165859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.22579, y: 0, z: 1.66541}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2054061565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3016590288651650133, guid: b532536456573d040bff577473ac04d4, type: 3}
@@ -4652,3 +4835,5 @@ SceneRoots:
   - {fileID: 1411110028}
   - {fileID: 1209026269}
   - {fileID: 1116828361}
+  - {fileID: 1645410611}
+  - {fileID: 1984165861}

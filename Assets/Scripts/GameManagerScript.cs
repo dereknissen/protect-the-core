@@ -32,10 +32,20 @@ public class GameManagerScript : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
 
+<<<<<<< Updated upstream
     [Header("Wave UI References")]
     public Text winText;
     public GameObject replayButton;
 
+=======
+    [Header("Med Pack Spawning")]
+    public GameObject medPackPrefab;
+    public Transform medPackSpawnPoints;
+    public float minMedPackSpawnTime = 15f;
+    public float maxMedPackSpawnTime = 40f;
+
+    private GameObject currentMedPack;
+>>>>>>> Stashed changes
     private bool isSpawning = false;
     private bool isTransitioningWave = false;
     private int enemiesStoppedThisWave = 0;
@@ -72,7 +82,11 @@ public class GameManagerScript : MonoBehaviour
 
         int liveEnemies = enemiesWrapper.childCount;
 
+<<<<<<< Updated upstream
         // Spawn another enemy when none remain
+=======
+        // Spawn enemy if there are none
+>>>>>>> Stashed changes
         if (liveEnemies <= 0 && !isSpawning)
         {
             StartCoroutine(spawnEnemyWithDelay());
@@ -83,6 +97,7 @@ public class GameManagerScript : MonoBehaviour
     public void startGame()
     {
         Debug.Log("Starting game");
+<<<<<<< Updated upstream
 
         StopAllCoroutines();
 
@@ -91,12 +106,30 @@ public class GameManagerScript : MonoBehaviour
 
         isSpawning = false;
         isTransitioningWave = false;
+=======
+
+        StopAllCoroutines();
+
+        isSpawning = false;
+
+        // Reset game state
+>>>>>>> Stashed changes
         isPlaying = false;
 
         clearUIs();
         clearEnemies();
 
+<<<<<<< Updated upstream
         // Reset game state
+=======
+        // Clear any existing med pack
+        if (currentMedPack != null)
+        {
+            Destroy(currentMedPack);
+            currentMedPack = null;
+        }
+
+>>>>>>> Stashed changes
         enemiesStopped = 0;
         enemiesStoppedThisWave = 0;
         health = maxLives;
@@ -108,17 +141,25 @@ public class GameManagerScript : MonoBehaviour
 
         isPlaying = true;
 
+<<<<<<< Updated upstream
         Debug.Log("Wave 1 started!");
+=======
+        // Start random med pack spawning
+        StartCoroutine(SpawnMedPacks());
+>>>>>>> Stashed changes
     }
 
+    // Enemy spawning coroutine
     IEnumerator spawnEnemyWithDelay()
     {
         isSpawning = true;
 
-        // Wait before spawning the next enemy
         yield return new WaitForSeconds(spawnDelay);
 
+<<<<<<< Updated upstream
         // Make sure game is still running
+=======
+>>>>>>> Stashed changes
         if (isPlaying &&
             !isTransitioningWave &&
             enemiesWrapper != null &&
@@ -130,6 +171,119 @@ public class GameManagerScript : MonoBehaviour
         isSpawning = false;
     }
 
+<<<<<<< Updated upstream
+=======
+    // Random med pack spawning coroutine
+    IEnumerator SpawnMedPacks()
+    {
+        Debug.Log("MED PACK SPAWNER STARTED!");
+
+        while (isPlaying)
+        {
+            float waitTime = Random.Range(
+                minMedPackSpawnTime,
+                maxMedPackSpawnTime
+            );
+
+            Debug.Log("Waiting " + waitTime + " seconds for med pack.");
+
+            yield return new WaitForSeconds(waitTime);
+
+            if (!isPlaying)
+                yield break;
+
+            if (currentMedPack == null)
+            {
+                SpawnMedPack();
+            }
+            else
+            {
+                Debug.Log("A med pack already exists. Skipping spawn.");
+            }
+        }
+    }
+
+    // Spawn a med pack at a random location
+
+    void SpawnMedPack()
+    {
+        if (medPackPrefab == null)
+        {
+            Debug.LogError("Med Pack Prefab is not assigned!");
+            return;
+        }
+
+        if (medPackSpawnPoints == null ||
+            medPackSpawnPoints.childCount == 0)
+        {
+            Debug.LogError("Med Pack Spawn Points are missing!");
+            return;
+        }
+
+        int randomIndex = Random.Range(
+            0,
+            medPackSpawnPoints.childCount
+        );
+
+        Transform selectedPoint =
+            medPackSpawnPoints.GetChild(randomIndex);
+
+        // Spawn the med pack
+        currentMedPack = Instantiate(
+            medPackPrefab,
+            selectedPoint.position,
+            selectedPoint.rotation
+        );
+
+        // Find MedPackPickup, including on child objects
+        MedPackPickup pickup =
+            currentMedPack.GetComponentInChildren<MedPackPickup>(true);
+
+        if (pickup != null)
+        {
+            pickup.gameManager = this;
+            Debug.Log("GameManager successfully assigned!");
+        }
+        else
+        {
+            Debug.LogError("MedPackPickup script not found on med pack!");
+        }
+
+        Debug.Log("Med pack spawned at: " + selectedPoint.name);
+    }
+
+
+    // Restores Core health when med pack is collected
+    public bool RestoreCore(int amount)
+    {
+        if (!isPlaying)
+            return false;
+
+        if (health >= maxLives)
+        {
+            Debug.Log("Core health is already full!");
+            return false;
+        }
+
+        health = Mathf.Min(health + amount, maxLives);
+
+        Debug.Log(
+            "Core repaired! Health: " +
+            health + "/" + maxLives
+        );
+
+        return true;
+    }
+
+    // Replay button
+    public void replayButtonClicked()
+    {
+        Debug.Log("Debug button clicked!");
+        startGame();
+    }
+
+    // Spawn an enemy
+>>>>>>> Stashed changes
     void spawnEnemy()
     {
         if (enemySpawnPoints == null ||
@@ -151,7 +305,6 @@ public class GameManagerScript : MonoBehaviour
             return;
         }
 
-        // Select random spawn point
         int randomIndex = Random.Range(
             0,
             enemySpawnPoints.childCount
@@ -160,7 +313,6 @@ public class GameManagerScript : MonoBehaviour
         Transform spawnPoint =
             enemySpawnPoints.GetChild(randomIndex);
 
-        // Spawn enemy
         GameObject newEnemy = Instantiate(
             enemyPrefab,
             spawnPoint.position,
@@ -308,10 +460,12 @@ public class GameManagerScript : MonoBehaviour
         startGame();
     }
 
+    // Player wins
     void playerWon()
     {
         Debug.Log("Player won the game!");
 
+<<<<<<< Updated upstream
         isPlaying = false;
 
         StopAllCoroutines();
@@ -324,6 +478,11 @@ public class GameManagerScript : MonoBehaviour
             winText.text = "YOU WIN!";
         }
 
+=======
+        StopAllCoroutines();
+        isSpawning = false;
+
+>>>>>>> Stashed changes
         if (hud != null)
             hud.SetActive(false);
 
@@ -333,18 +492,26 @@ public class GameManagerScript : MonoBehaviour
         if (loseScreen != null)
             loseScreen.SetActive(false);
 
+<<<<<<< Updated upstream
         // Show Replay button for final victory
         if (replayButton != null)
             replayButton.SetActive(true);
 
+=======
+>>>>>>> Stashed changes
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
+<<<<<<< Updated upstream
+=======
+    // Player loses
+>>>>>>> Stashed changes
     void playerLost()
     {
         Debug.Log("Player lost the game!");
 
+<<<<<<< Updated upstream
         isPlaying = false;
 
         StopAllCoroutines();
@@ -358,6 +525,17 @@ public class GameManagerScript : MonoBehaviour
         if (winScreen != null)
             winScreen.SetActive(false);
 
+=======
+        StopAllCoroutines();
+        isSpawning = false;
+
+        if (hud != null)
+            hud.SetActive(false);
+
+        if (winScreen != null)
+            winScreen.SetActive(false);
+
+>>>>>>> Stashed changes
         if (loseScreen != null)
             loseScreen.SetActive(true);
 
@@ -367,6 +545,7 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("GameManager unlocked cursor");
     }
 
+    // Clear existing enemies
     void clearEnemies()
     {
         if (enemiesWrapper == null)
@@ -376,13 +555,17 @@ public class GameManagerScript : MonoBehaviour
         for (int i = enemiesWrapper.childCount - 1;
              i >= 0; i--)
         {
+<<<<<<< Updated upstream
             Transform enemy = enemiesWrapper.GetChild(i);
 
+=======
+>>>>>>> Stashed changes
             enemy.SetParent(null);
             Destroy(enemy.gameObject);
         }
     }
 
+    // Manage UI screens
     void clearUIs()
     {
         Debug.Log("Clearing UIs");
