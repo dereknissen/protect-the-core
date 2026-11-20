@@ -18,7 +18,7 @@ public class GunController : MonoBehaviour
     public float reloadTime = 2f;
 
     [Header("Burst Attack Settings")]
-    public int burstBulletCount = 16;
+    public int burstBulletCount = 6;
     public float burstCooldown = 5f;
     public int burstAmmoCost = 3;
     public float burstSpawnDistance = 1f;
@@ -29,6 +29,9 @@ public class GunController : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public TMP_Text ammoText;
+
+    [Header("Audio Settings")]
+    public AudioSource gunAudioSource;
 
     private float nextFireTime;
     private float nextBurstTime;
@@ -52,7 +55,7 @@ public class GunController : MonoBehaviour
                 StartReload();
             }
 
-            // Press X for a 360-degree bullet burst
+            // Press X for the six-direction burst
             if (Keyboard.current.xKey.wasPressedThisFrame)
             {
                 TryBurst();
@@ -82,6 +85,15 @@ public class GunController : MonoBehaviour
         }
     }
 
+    void PlayGunSound()
+    {
+        if (gunAudioSource != null &&
+            gunAudioSource.clip != null)
+        {
+            gunAudioSource.PlayOneShot(gunAudioSource.clip);
+        }
+    }
+
     void TryBurst()
     {
         if (isReloading)
@@ -99,14 +111,12 @@ public class GunController : MonoBehaviour
             return;
         }
 
-        if (bulletPrefab == null)
+        if (bulletPrefab == null || firePoint == null)
         {
-            Debug.LogWarning("Assign Bullet Prefab!");
+            Debug.LogWarning(
+                "Assign Bullet Prefab and FirePoint!");
             return;
         }
-
-        if (burstBulletCount <= 0)
-            return;
 
         FireBurst();
 
@@ -118,24 +128,19 @@ public class GunController : MonoBehaviour
 
     void FireBurst()
     {
-        if (firePoint == null)
-        {
-            Debug.LogWarning("Assign FirePoint in the Inspector!");
-            return;
-        }
-
+        // Same spawn position as normal shooting
         Vector3 center = firePoint.position;
 
-        // Six bullets in different 3D directions
+        // Six different 3D directions
         Vector3[] directions =
         {
-        Vector3.forward,
-        Vector3.back,
-        Vector3.left,
-        Vector3.right,
-        Vector3.up,
-        Vector3.down
-    };
+            Vector3.forward,
+            Vector3.back,
+            Vector3.left,
+            Vector3.right,
+            Vector3.up,
+            Vector3.down
+        };
 
         foreach (Vector3 direction in directions)
         {
@@ -144,6 +149,9 @@ public class GunController : MonoBehaviour
 
         if (muzzleFlash != null)
             muzzleFlash.Play();
+
+        // Play sound once for the entire burst
+        PlayGunSound();
 
         Debug.Log("6-direction burst fired!");
     }
@@ -198,6 +206,9 @@ public class GunController : MonoBehaviour
 
         if (muzzleFlash != null)
             muzzleFlash.Play();
+
+        // Play sound when shooting normally
+        PlayGunSound();
 
         Ray ray = playerCamera.ViewportPointToRay(
             new Vector3(0.5f, 0.5f, 0f));

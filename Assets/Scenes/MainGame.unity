@@ -910,7 +910,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000061035156, y: 22.699951}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 211.35, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &275396465
 MonoBehaviour:
@@ -3674,6 +3674,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3016590288651650133, guid: b532536456573d040bff577473ac04d4, type: 3}
   m_PrefabInstance: {fileID: 1828929195}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1387285146 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5680944591790726582, guid: 40bcc7b145e940043bfbb614069ffad3, type: 3}
+  m_PrefabInstance: {fileID: 1605451136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1387794365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4077,6 +4082,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 919715128}
     m_Modifications:
+    - target: {fileID: 5680944591790726582, guid: 40bcc7b145e940043bfbb614069ffad3, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6947568922508443046, guid: 40bcc7b145e940043bfbb614069ffad3, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.735353
@@ -4787,6 +4796,7 @@ MonoBehaviour:
   firePoint: {fileID: 2103291986}
   bulletPrefab: {fileID: 7245608061683911773, guid: 64b00bcfb66507f44b6328b6b4fa1dd2, type: 3}
   ammoText: {fileID: 230852069}
+  gunAudioSource: {fileID: 1387285146}
 --- !u!4 &2095260070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1196775490118650620, guid: 6cc057f0d611a36409b71b49165a58d3, type: 3}
