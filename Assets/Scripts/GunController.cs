@@ -17,6 +17,12 @@ public class GunController : MonoBehaviour
     public int currentAmmo = 10;
     public float reloadTime = 2f;
 
+    [Header("Burst Attack Settings")]
+    public int burstBulletCount = 16;
+    public float burstCooldown = 5f;
+    public int burstAmmoCost = 3;
+    public float burstSpawnDistance = 1f;
+
     [Header("References")]
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
@@ -25,6 +31,7 @@ public class GunController : MonoBehaviour
     public TMP_Text ammoText;
 
     private float nextFireTime;
+    private float nextBurstTime;
     private bool isReloading = false;
 
     void Start()
@@ -38,16 +45,21 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current != null &&
-            Keyboard.current.rKey.wasPressedThisFrame)
+        if (Keyboard.current != null)
         {
-            StartReload();
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                StartReload();
+            }
+
+            // Press X for a 360-degree bullet burst
+            if (Keyboard.current.xKey.wasPressedThisFrame)
+            {
+                TryBurst();
+            }
         }
 
-        if (Mouse.current == null)
-            return;
-
-        if (isReloading)
+        if (Mouse.current == null || isReloading)
             return;
 
         if (Mouse.current.leftButton.wasPressedThisFrame &&
@@ -59,7 +71,6 @@ public class GunController : MonoBehaviour
                 Shoot();
 
                 currentAmmo--;
-
                 UpdateAmmoUI();
 
                 nextFireTime = Time.time + fireRate;
@@ -69,6 +80,72 @@ public class GunController : MonoBehaviour
                 Debug.Log("Out of energy! Press R to reload.");
             }
         }
+    }
+
+    void TryBurst()
+    {
+        if (isReloading)
+            return;
+
+        if (Time.time < nextBurstTime)
+        {
+            Debug.Log("Burst attack is on cooldown!");
+            return;
+        }
+
+        if (currentAmmo < burstAmmoCost)
+        {
+            Debug.Log("Not enough ammo for burst!");
+            return;
+        }
+
+        if (bulletPrefab == null)
+        {
+            Debug.LogWarning("Assign Bullet Prefab!");
+            return;
+        }
+
+        if (burstBulletCount <= 0)
+            return;
+
+        FireBurst();
+
+        currentAmmo -= burstAmmoCost;
+        UpdateAmmoUI();
+
+        nextBurstTime = Time.time + burstCooldown;
+    }
+
+    void FireBurst()
+    {
+        if (firePoint == null)
+        {
+            Debug.LogWarning("Assign FirePoint in the Inspector!");
+            return;
+        }
+
+        Vector3 center = firePoint.position;
+
+        // Six bullets in different 3D directions
+        Vector3[] directions =
+        {
+        Vector3.forward,
+        Vector3.back,
+        Vector3.left,
+        Vector3.right,
+        Vector3.up,
+        Vector3.down
+    };
+
+        foreach (Vector3 direction in directions)
+        {
+            SpawnBullet(center, direction);
+        }
+
+        if (muzzleFlash != null)
+            muzzleFlash.Play();
+
+        Debug.Log("6-direction burst fired!");
     }
 
     void StartReload()
@@ -115,7 +192,7 @@ public class GunController : MonoBehaviour
         if (playerCamera == null || bulletPrefab == null)
         {
             Debug.LogWarning(
-                "Assign Player Camera and Bullet Prefab in the Inspector!");
+                "Assign Player Camera and Bullet Prefab!");
             return;
         }
 
@@ -125,7 +202,8 @@ public class GunController : MonoBehaviour
         Ray ray = playerCamera.ViewportPointToRay(
             new Vector3(0.5f, 0.5f, 0f));
 
-        Vector3 targetPoint = ray.origin + ray.direction * range;
+        Vector3 targetPoint =
+            ray.origin + ray.direction * range;
 
         if (Physics.Raycast(ray, out RaycastHit hit, range))
         {
@@ -140,22 +218,31 @@ public class GunController : MonoBehaviour
         Vector3 direction =
             (targetPoint - spawnPosition).normalized;
 
+        SpawnBullet(spawnPosition, direction);
+    }
+
+    // Shared bullet spawning for regular and burst attacks
+    void SpawnBullet(Vector3 spawnPosition, Vector3 direction)
+    {
         GameObject bullet = Instantiate(
             bulletPrefab,
             spawnPosition,
             Quaternion.LookRotation(direction));
 
-        Collider bulletCollider = bullet.GetComponent<Collider>();
+        // Prevent bullets from colliding with the player
+        Collider[] bulletColliders =
+            bullet.GetComponentsInChildren<Collider>();
 
         Collider[] playerColliders =
             transform.root.GetComponentsInChildren<Collider>();
 
-        if (bulletCollider != null)
+        foreach (Collider bulletCollider in bulletColliders)
         {
             foreach (Collider playerCollider in playerColliders)
             {
                 Physics.IgnoreCollision(
-                    bulletCollider, playerCollider);
+                    bulletCollider,
+                    playerCollider);
             }
         }
 
