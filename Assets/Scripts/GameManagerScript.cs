@@ -1,3 +1,4 @@
+
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -23,7 +24,12 @@ public class GameManagerScript : MonoBehaviour
     [Header("Enemy Spawning")]
     public Transform enemiesWrapper;
     public Transform enemySpawnPoints;
-    public GameObject enemyPrefab;
+
+    [Header("Zombie Prefabs")]
+    public GameObject greenZombiePrefab;
+    public GameObject redZombiePrefab;
+    public GameObject blueZombiePrefab;
+
     public float spawnDelay = 2f;
 
     [Header("UI References")]
@@ -62,7 +68,6 @@ public class GameManagerScript : MonoBehaviour
         if (!isPlaying)
             return;
 
-        // Check losing condition
         if (health <= 0)
         {
             isPlaying = false;
@@ -70,7 +75,6 @@ public class GameManagerScript : MonoBehaviour
             return;
         }
 
-        // Check wave completion
         if (enemiesStoppedThisWave >= enemiesToStop &&
             !isTransitioningWave)
         {
@@ -83,32 +87,27 @@ public class GameManagerScript : MonoBehaviour
 
         int liveEnemies = enemiesWrapper.childCount;
 
-        // Spawn another enemy when none remain
         if (liveEnemies <= 0 && !isSpawning)
         {
             StartCoroutine(spawnEnemyWithDelay());
         }
     }
 
-    // Starts or restarts the game
     public void startGame()
     {
         Debug.Log("Starting game");
 
         StopAllCoroutines();
 
-        // Restore time scale
         Time.timeScale = 1f;
 
         isSpawning = false;
         isTransitioningWave = false;
-
         isPlaying = false;
 
         clearUIs();
         clearEnemies();
 
-        // Clear existing med pack
         if (currentMedPack != null)
         {
             Destroy(currentMedPack);
@@ -120,10 +119,8 @@ public class GameManagerScript : MonoBehaviour
         health = maxLives;
         currentWave = 1;
 
-        // Update HUD counters
         updateWaveUI();
 
-        // Lock cursor for gameplay
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -131,11 +128,9 @@ public class GameManagerScript : MonoBehaviour
 
         Debug.Log("Wave 1 started!");
 
-        // Start random med pack spawning
         StartCoroutine(SpawnMedPacks());
     }
 
-    // Enemy spawning coroutine
     IEnumerator spawnEnemyWithDelay()
     {
         isSpawning = true;
@@ -153,7 +148,6 @@ public class GameManagerScript : MonoBehaviour
         isSpawning = false;
     }
 
-    // Random med pack spawning coroutine
     IEnumerator SpawnMedPacks()
     {
         Debug.Log("MED PACK SPAWNER STARTED!");
@@ -178,7 +172,6 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    // Spawn med pack at a random location
     void SpawnMedPack()
     {
         if (medPackPrefab == null)
@@ -208,7 +201,6 @@ public class GameManagerScript : MonoBehaviour
             selectedPoint.rotation
         );
 
-        // Automatically assign GameManager
         MedPackPickup pickup =
             currentMedPack.GetComponentInChildren<MedPackPickup>(true);
 
@@ -229,7 +221,6 @@ public class GameManagerScript : MonoBehaviour
         );
     }
 
-    // Restore Core health
     public bool RestoreCore(int amount)
     {
         if (!isPlaying)
@@ -251,7 +242,47 @@ public class GameManagerScript : MonoBehaviour
         return true;
     }
 
-    // Spawn an enemy
+    // Determine which zombie should spawn
+    GameObject GetZombiePrefab()
+    {
+        int zombieNumber = enemiesStoppedThisWave;
+
+        // WAVE 1: All green zombies
+        if (currentWave == 1)
+        {
+            return greenZombiePrefab;
+        }
+
+        // WAVE 2: One red zombie
+        if (currentWave == 2)
+        {
+            if (zombieNumber == 1)
+            {
+                return redZombiePrefab;
+            }
+
+            return greenZombiePrefab;
+        }
+
+        // WAVE 3: One red and one blue zombie
+        if (currentWave >= 3)
+        {
+            if (zombieNumber == 1)
+            {
+                return redZombiePrefab;
+            }
+
+            if (zombieNumber == 2)
+            {
+                return blueZombiePrefab;
+            }
+
+            return greenZombiePrefab;
+        }
+
+        return greenZombiePrefab;
+    }
+
     void spawnEnemy()
     {
         if (enemySpawnPoints == null ||
@@ -261,15 +292,20 @@ public class GameManagerScript : MonoBehaviour
             return;
         }
 
-        if (enemyPrefab == null)
-        {
-            Debug.LogError("No enemy prefab assigned!");
-            return;
-        }
-
         if (enemiesWrapper == null)
         {
             Debug.LogError("No enemies wrapper assigned!");
+            return;
+        }
+
+        // Select zombie based on wave and progress
+        GameObject selectedPrefab = GetZombiePrefab();
+
+        if (selectedPrefab == null)
+        {
+            Debug.LogError(
+                "Zombie prefab missing for Wave " + currentWave
+            );
             return;
         }
 
@@ -282,18 +318,16 @@ public class GameManagerScript : MonoBehaviour
             enemySpawnPoints.GetChild(randomIndex);
 
         GameObject newEnemy = Instantiate(
-            enemyPrefab,
+            selectedPrefab,
             spawnPoint.position,
             spawnPoint.rotation,
             enemiesWrapper
         );
 
-        // Calculate movement speed based on current wave
         float currentSpeed =
             startingEnemySpeed +
             ((currentWave - 1) * speedIncreasePerWave);
 
-        // Assign GameManager and movement speed
         EnemyFollowCore enemyFollow =
             newEnemy.GetComponent<EnemyFollowCore>();
 
@@ -309,7 +343,6 @@ public class GameManagerScript : MonoBehaviour
             );
         }
 
-        // Assign GameManager to enemy death effect
         EnemyDeathEffect enemyDeath =
             newEnemy.GetComponent<EnemyDeathEffect>();
 
@@ -325,12 +358,11 @@ public class GameManagerScript : MonoBehaviour
         }
 
         Debug.Log(
-            $"Spawned enemy for Wave {currentWave} " +
+            $"Wave {currentWave}: Spawned {selectedPrefab.name} " +
             $"with movement speed {currentSpeed}"
         );
     }
 
-    // Called whenever an enemy is defeated
     public void enemyDefeated()
     {
         if (!isPlaying || isTransitioningWave)
@@ -339,7 +371,6 @@ public class GameManagerScript : MonoBehaviour
         enemiesStopped++;
         enemiesStoppedThisWave++;
 
-        // Immediately update HUD
         updateWaveUI();
 
         Debug.Log(
@@ -348,7 +379,6 @@ public class GameManagerScript : MonoBehaviour
         );
     }
 
-    // Updates the wave and enemy counter on HUD
     void updateWaveUI()
     {
         int enemiesRemaining = Mathf.Max(
@@ -378,14 +408,12 @@ public class GameManagerScript : MonoBehaviour
 
         Debug.Log($"Wave {currentWave} completed!");
 
-        // Final wave completed
         if (currentWave >= totalWaves)
         {
             playerWon();
             yield break;
         }
 
-        // Display wave completion message
         if (winText != null)
         {
             winText.text = $"WAVE {currentWave} COMPLETE!";
@@ -400,34 +428,27 @@ public class GameManagerScript : MonoBehaviour
         if (loseScreen != null)
             loseScreen.SetActive(false);
 
-        // Hide Replay button between waves
         if (replayButton != null)
             replayButton.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Pause gameplay
         Time.timeScale = 0f;
 
         yield return new WaitForSecondsRealtime(
             wavePauseDuration
         );
 
-        // Resume gameplay
         Time.timeScale = 1f;
 
-        // Remove leftover enemies
         clearEnemies();
 
-        // Advance to next wave
         currentWave++;
         enemiesStoppedThisWave = 0;
 
-        // Update HUD for next wave
         updateWaveUI();
 
-        // Hide Win UI and show HUD
         if (winScreen != null)
             winScreen.SetActive(false);
 
@@ -443,14 +464,12 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log($"Wave {currentWave} started!");
     }
 
-    // Replay button
     public void replayButtonClicked()
     {
         Debug.Log("Replay button clicked!");
         startGame();
     }
 
-    // Player wins
     void playerWon()
     {
         Debug.Log("Player won the game!");
@@ -483,7 +502,6 @@ public class GameManagerScript : MonoBehaviour
         Cursor.visible = true;
     }
 
-    // Player loses
     void playerLost()
     {
         Debug.Log("Player lost the game!");
@@ -513,7 +531,6 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("GameManager unlocked cursor");
     }
 
-    // Clear existing enemies
     void clearEnemies()
     {
         if (enemiesWrapper == null)
@@ -530,7 +547,6 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    // Manage UI screens
     void clearUIs()
     {
         Debug.Log("Clearing UIs");

@@ -3077,7 +3077,9 @@ MonoBehaviour:
   wavePauseDuration: 3
   enemiesWrapper: {fileID: 1387794366}
   enemySpawnPoints: {fileID: 494981478}
-  enemyPrefab: {fileID: 7562301882765937422, guid: 5a959f69e58c0c6488e7b927e5a4b2e0, type: 3}
+  greenZombiePrefab: {fileID: 7525247038636464532, guid: 00ab1732015d47c49b45de894e11aac6, type: 3}
+  redZombiePrefab: {fileID: 5380580810290460260, guid: c2de12aba4ead5d498511c31dbba9db3, type: 3}
+  blueZombiePrefab: {fileID: 3521645914679945643, guid: 45a1f9db77134e94f99a88bfc6511fbe, type: 3}
   spawnDelay: 2
   hud: {fileID: 239579447}
   winScreen: {fileID: 2115549741}
@@ -4780,7 +4782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb07fcd62a5fe04a8d3e99658816627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunController
-  damage: 25
+  damage: 1
   range: 100
   fireRate: 0.2
   bulletSpeed: 40

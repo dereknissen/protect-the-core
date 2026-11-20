@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94222482222de34d8b43cef04bf34ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetHealth
-  health: 1
+  health: 2
 --- !u!1001 &4512174405405322529
 PrefabInstance:
   m_ObjectHideFlags: 0
