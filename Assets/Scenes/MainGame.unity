@@ -2437,8 +2437,8 @@ MonoBehaviour:
   rotationSpeed: 12
   jumpForce: 6
   cameraTransform: {fileID: 0}
-  cameraDistance: 5
-  cameraHeight: 2
+  cameraDistance: 3
+  cameraHeight: 0.5
   mouseSensitivity: 0.15
   minPitch: -25
   maxPitch: 60
