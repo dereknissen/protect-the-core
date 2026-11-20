@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spin : MonoBehaviour
+public class Spin1 : MonoBehaviour
 {
     [Header("Rotation Setting")]
     public Vector3 rotationAxis = Vector3.up;
